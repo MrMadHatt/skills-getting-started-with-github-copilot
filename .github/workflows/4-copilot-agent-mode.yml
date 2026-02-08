@@ -35,7 +35,7 @@ jobs:
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
-          ref: v0.7.0
+          ref: v0.7.3
 
       - name: Find last comment
         id: find-last-comment
@@ -115,7 +115,7 @@ jobs:
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
-          ref: v0.7.0
+          ref: v0.7.3
 
       - name: Create comment - step finished
         uses: GrantBirki/comment@v2.1.1
@@ -132,6 +132,13 @@ jobs:
           repository: ${{ env.ISSUE_REPOSITORY }}
           issue-number: ${{ env.ISSUE_NUMBER }}
           file: ${{ env.STEP_5_FILE }}
+
+      - name: Verify watching-for-progress template exists
+        run: |
+          if [[ ! -f "exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md" ]]; then
+            echo "Template not found at exercise-toolkit/markdown-templates/step-feedback/watching-for-progress.md"
+            exit 1
+          fi
 
       - name: Create comment - watching for progress
         uses: GrantBirki/comment@v2.1.1
